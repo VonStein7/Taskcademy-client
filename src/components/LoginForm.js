@@ -4,29 +4,47 @@ import { Button, Field, Control, Input, Title, Hero, Container } from 'reactbulm
 class LoginForm extends Component {
   state = {
     email: "",
-    password: ""
+    password: "",
+    errors: ""
   }
 
   handleSubmit = () => {
-    fetch("http://localhost:3000/api/v1/login", {
+    fetch("https://task-academy-api.herokuapp.com/api/v1/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         "Accept": "application/json"
       },
       body: JSON.stringify({
-        user: this.state
+        user: {
+          email: this.state.email,
+          password: this.state.password
+        }
       })
     })
     .then(res => res.json())
     .then(user => {
-      this.props.login(user)
+      if(user.errors){
+        // alert(user.errors)
+        // console.log(user.errors)
+        this.setState({
+          errors: user.errors
+        })
+      }
+      else{
+        this.props.login(user)
+        this.props.history.push("/home")
+      }
+      
     })
 
-    this.props.history.push('/home')
 
   }
-
+  handleRemoveNotification = () => {
+    this.setState({
+      errors: ""
+    })
+  }
   handleChange = (event) => {
     this.setState({
       [event.target.name]: event.target.value
@@ -34,7 +52,6 @@ class LoginForm extends Component {
   }
 
   render() {
-    console.log(this.props)
     return (
       <div>
 
@@ -52,7 +69,9 @@ class LoginForm extends Component {
                   name="email"
                   value={this.state.email}
                   type="text"
-                  placeholder="email" />
+                  placeholder="email"
+                  required
+                  />
 
               </Control>
               <Control>
@@ -62,7 +81,9 @@ class LoginForm extends Component {
                 name="password"
                 value={this.state.password}
                 type="password"
-                placeholder="password"/>
+                placeholder="password"
+                required
+                />
 
               </Control>
               <Button onClick={this.handleSubmit} primary>Login</Button>
@@ -70,6 +91,21 @@ class LoginForm extends Component {
           </Container>
         </Hero.Body>
       </Hero>
+      {
+        this.state.errors ?
+        <article className="message is-danger">
+          <div className="message-header">
+            <p>Error!</p>
+            <button onClick={this.handleRemoveNotification} className="delete" aria-label="delete"></button>
+          </div>
+          <div className="message-body">
+             {this.state.errors}
+          </div>
+        </article>
+        :
+        null
+      }
+      
       </div>
     );
   }

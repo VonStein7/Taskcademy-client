@@ -44,7 +44,7 @@ class TaskShow extends React.Component {
   )}
 
   componentDidMount(){
-    fetch(`http://localhost:3000/api/v1${this.props.routerProps.location.pathname}`)
+    fetch(`https://task-academy-api.herokuapp.com/api/v1${this.props.routerProps.location.pathname}`)
     .then(res => res.json())
     .then(task => {
       console.log(task)

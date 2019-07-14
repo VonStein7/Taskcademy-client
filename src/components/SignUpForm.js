@@ -7,7 +7,8 @@ class SignUpForm extends Component {
     first_name: "",
     last_name: "",
     email: "",
-    password: ""
+    password: "",
+    errors: []
   }
 
   handleChange = (event) => {
@@ -17,25 +18,45 @@ class SignUpForm extends Component {
   }
 
   handleSubmit = () => {
-    console.log("made it to fetch")
-    fetch("http://localhost:3000/api/v1/users", {
+    fetch("https://task-academy-api.herokuapp.com/api/v1/users", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         "Accept": "application/json"
       },
       body: JSON.stringify({
-        user: this.state
+        user: {
+          first_name: this.state.first_name,
+          last_name: this.state.last_name,
+          email: this.state.email,
+          password: this.state.password
+        }
       })
     })
     .then(res => res.json())
     .then(user => {
-      console.log("Returned User", user)
-      this.props.signUp(user)
+      if(user.errors){
+        // console.log(user.errors)
+        this.setState({
+          errors: user.errors
+        })
+        // alert(user.errors)
+      }
+      else{
+        this.props.signUp(user)
+        this.props.history.push("/home")
+      }
+    })
+  }
+
+  handleRemoveNotification = () => {
+    this.setState({
+      errors: []
     })
   }
 
   render() {
+    // console.log(this.props.history)
     return (
       <div>
       <Hero>
@@ -97,11 +118,30 @@ class SignUpForm extends Component {
               placeholder="image url"/>
               </Control>
 
-              <Link to="/home"><Button onClick={this.handleSubmit}primary>Sign Up</Button></Link>
+              <Button onClick={this.handleSubmit}primary>Sign Up</Button>
             </Field>
           </Container>
         </Hero.Body>
       </Hero>
+
+      {
+        this.state.errors.length !== 0 ?
+        <article className="message is-danger">
+          <div className="message-header">
+            <p>Error!</p>
+            <button onClick={this.handleRemoveNotification} className="delete" aria-label="delete"></button>
+          </div>
+          <div className="message-body">
+             <ul>
+               {this.state.errors.map(error => {
+                 return <li>{error}</li>
+               })}
+             </ul>
+          </div>
+        </article>
+        :
+        null
+      }
       </div>
     );
   }
@@ -109,3 +149,4 @@ class SignUpForm extends Component {
 }
 
 export default SignUpForm;
+
