@@ -1,5 +1,8 @@
 # Task Academy
-Users are able to login or signup and enroll for preexisting courses. Within each course are tasks/assignments that can be completed. Upon completion, users are able to drag and drop the task/assignment to a finished list as a way of keeping track of tasks already completed.  
+
+Users are able to login or signup and enroll for preexisting courses. Within each course are tasks/assignments that can be completed. Upon completion, users are able to drag and drop the task/assignment to a finished list as a way of keeping track of tasks already completed.
+
+Explore Deployed Version: https://task-academy-react.herokuapp.com/
 
 ## Getting Started
 First, fork and clone this repo. There are two repositories that will need setup, beef-steak-academy-api and Taskcademy-client. Change directory into beef-steak-academy-api. 
