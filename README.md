@@ -1,69 +1,45 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Task Academy
+Users are able to login or signup and enroll for preexisting courses. Within each course are tasks/assignments that can be completed. Upon completion, users are able to drag and drop the task/assignment to a finished list as a way of keeping track of tasks already completed.  
 
-## Available Scripts
+## Getting Started
+First, fork and clone this repo. There are two repositories that will need setup, beef-steak-academy-api and Taskcademy-client. Change directory into beef-steak-academy-api. 
 
-In the project directory, you can run:
+### Prerequisites
+Ruby and Rails and Postgresql have to be installed on your computer. 
 
-### `npm start`
+* If it is not installed, start by going in your terminal, and type:
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+brew install rbenv ruby-build
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+### Install Ruby
+rbenv install 2.6.3
+rbenv global 2.6.3
+ruby -v (to verify)
 
-### `npm test`
+### Install Rails
+gem install rails -v 5.2.3
+rails -v (to verify)
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Install Postgresql
+brew install postgresql
 
-### `npm run build`
+Once the Ruby on Rails has been setup and installed, run 'bundle install', 'rails db:create', 'rails db:migrate', and 'rails db:seed', 'rails server' seqentially on your terminal to get the rails api started.
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+### Running the App
+Once the rails server is running, cd into the Taskcademy-client. Run 'npm start' to start react. Keep in mind that this app has been deployed to heroku and the fetch urls are dependent on those routes. If for some reason, heroku is not working, change routes to rails api, from 'https://task-academy-api.herokuapp.com/api/v1' to 'localhost:3000/api/v1'.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+## Built With
+Ruby on Rails - The api server used
+Bulma - CSS library used
+ReactJS - Javascript library used
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Authors
+Reinald Reynoso
+Mallory Woods
+Brenden Williams
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
-# beefsteak-academy
+## Acknowledgments
+* Flatiron School
